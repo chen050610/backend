@@ -217,7 +217,7 @@ exports.changeIdentityToUser=(req,res)=>{
     })
 }
 //对用户进行赋权
-exports.changeIdentityToAdmin=(req,res)=>{
+    exports.changeIdentityToAdmin=(req,res)=>{
     const sql = 'update users set identity = ? where id = ?'
     db.query(sql,[req.body.identity,req.body.id],(err,result)=>{
         if (err) returnres.cc(err)
