@@ -36,6 +36,12 @@ router.post('/hotUser',loginHandler.hotUser)
 router.post('/getBanList',loginHandler.getBanList)
 //永久的删除用户
 router.post('/deleteUser',loginHandler.deleteUser)
+//获取对应身份的总人数
+router.post('/searchUserDepartment',loginHandler.searchUserDepartment)
+//监听页码返回数据
+router.post('/getAdminListLength',loginHandler.getAdminListLength)
 //
+router.post('/returnListData',loginHandler.returnListData)
+
 
 module.exports = router

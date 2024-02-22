@@ -13,4 +13,6 @@ router.post('/changeCompanyName',settingHandler.changeCompanyName)
 router.post('/changeCompanyIntroduce',settingHandler.changeCompanyIntroduce)
 router.post('/getCompanyIntroduce',settingHandler.getCompanyIntroduce)
 router.post('/getAllCompanyIntroduce',settingHandler.getAllCompanyIntroduce)
+router.post('/setDepartment',settingHandler.setDepartment)
+router.post('/getDepartment',settingHandler.getDepartment)
 module.exports = router

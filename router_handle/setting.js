@@ -67,9 +67,30 @@ exports.changeCompanyIntroduce = (req,res) =>{
 }
 //获取所有 与公司相关的信息
 exports.getAllCompanyIntroduce = (req,res) =>{
-        const  sql = "select * from setting where set_name like '公司%'"
+    const  sql = "select * from setting where set_name like '公司%'"
     db.query(sql,(err,result) =>{
         if (err) return res.cc(err)
         res.send(result)
+    })
+}
+
+// =-----------------------------------------_______________________________
+//部门设置 数组
+exports.setDepartment = (req,res) =>{
+    const sql = "update setting set set_value = ? where set_name = '部门设置' "
+    db.query(sql,req.body.set_value,(err,result) =>{
+        if (err) return res.cc(err)
+        res.send({
+            status:0,
+            message:'部门设置成功'
+        })
+    })
+}
+//获取部门
+exports.getDepartment = (req,res) =>{
+    const  sql = "select set_value from setting where set_name = '部门设置'"
+    db.query(sql,(err,result) =>{
+        if (err) return res.cc(err)
+        res.send(result[0].set_value)
     })
 }

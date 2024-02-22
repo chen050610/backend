@@ -184,7 +184,13 @@ exports.createAdmin=(req,res)=>{
 exports.getAdminList=(req,res)=>{
     const sql = 'select * from users where identity = ?'
     db.query(sql,req.body.identity,(err,result)=>{
-        if (err) returnres.cc(err)
+        if (err) return res.cc(err)
+        result.forEach((e)=>{
+            e.password=''
+            e.create_time = ''
+            e.image_url = ''
+            e.status = ''
+        })
         res.send(result)
     })
 }
@@ -197,7 +203,7 @@ exports.editAdmin=(req,res)=>{
     }
     const sql = 'update users set ? where id= ?'
     db.query(sql,[updateContent,updateContent.id],(err,result)=>{
-        if (err) returnres.cc(err)
+        if (err) return res.cc(err)
         res.send({
             status:0,
             message:'修改管理员成功'
@@ -220,7 +226,7 @@ exports.changeIdentityToUser=(req,res)=>{
     exports.changeIdentityToAdmin=(req,res)=>{
     const sql = 'update users set identity = ? where id = ?'
     db.query(sql,[req.body.identity,req.body.id],(err,result)=>{
-        if (err) returnres.cc(err)
+        if (err) return res.cc(err)
         res.send({
             status:0,
             message:'赋权成功'
@@ -231,17 +237,34 @@ exports.changeIdentityToUser=(req,res)=>{
 exports.searchUser=(req,res)=>{
     const sql = 'select * from users where account = ?'
     db.query(sql,req.body.account,(err,result)=>{
-        if (err) returnres.cc(err)
+        if (err) return res.cc(err)
+        result.forEach((e)=>{
+            e.password=''
+            e.create_time = ''
+            e.image_url = ''
+            e.status = ''
+        })
         res.send(result)
     })
 }
-
+//通部门对用户进行搜索
+exports.searchUserDepartment=(req,res)=>{
+    const sql = 'select * from users where department = ? and identity = "用户"'
+    db.query(sql,req.body.department,(err,result)=>{
+        if (err) return res.cc(err)
+        result.forEach((e)=>{
+            e.password=''
+            e.image_url = ''
+        })
+        res.send(result)
+    })
+}
 //冻结用户
 exports.banUser=(req,res)=>{
     const status  = 1
     const sql = 'update users set status = ? where id = ?'
     db.query(sql,[status,req.body.id],(err,result)=>{
-        if (err) returnres.cc(err)
+        if (err) return res.cc(err)
         res.send({
             status:0,
             message:'冻结成功'
@@ -253,7 +276,7 @@ exports.hotUser=(req,res)=>{
     const status  = 0
     const sql = 'update users set status = ? where id = ?'
     db.query(sql,[status,req.body.id],(err,result)=>{
-        if (err) returnres.cc(err)
+        if (err) return res.cc(err)
         res.send({
             status:0,
             message:'解冻成功'
@@ -264,7 +287,7 @@ exports.hotUser=(req,res)=>{
 exports.getBanList=(req,res)=>{
     const sql = 'select * from users where status = "1"'
     db.query(sql,(err,result)=>{
-        if (err) returnres.cc(err)
+        if (err) return res.cc(err)
         res.send(result)
     })
 }
@@ -284,4 +307,25 @@ exports.deleteUser=(req,res)=>{
 
 
     })
+}
+//获取对应身份的额总人数 identity
+exports.getAdminListLength=(req,res)=>{
+    const sql = 'select * from users where identity = ?'
+    db.query(sql,req.body.identity,(err,result)=>{
+        if (err) return res.cc(err)
+        res.send({
+            length:result.length
+        })
+    })
+
+}
+//监听换页返回数据 页码 身份
+exports.returnListData=(req,res)=>{
+    const number = 	 (req.body.pager - 1) * 10
+    const sql = `select * from users where identity = ? limit 10 offset ${number}`
+    db.query(sql,req.body.identity,(err,result)=>{
+        if (err) return res.cc(err)
+        res.send(result)
+    })
+
 }
