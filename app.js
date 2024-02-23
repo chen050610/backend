@@ -52,6 +52,8 @@ const userRouter = require('./router/userinfo')
 app.use('/user',userRouter)
 const setRouter = require('./router/setting')
 app.use('/set',setRouter)
+const productRouter = require('./router/product.js')
+app.use('/pro',productRouter)
 //对不符合joi规则进行报错
 // 对不符合joi规则的情况进行报错
 app.use((err,req, res, next) => {

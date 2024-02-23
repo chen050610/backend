@@ -224,8 +224,9 @@ exports.changeIdentityToUser=(req,res)=>{
 }
 //对用户进行赋权
     exports.changeIdentityToAdmin=(req,res)=>{
-    const sql = 'update users set identity = ? where id = ?'
-    db.query(sql,[req.body.identity,req.body.id],(err,result)=>{
+    const date  = new Date()
+    const sql = 'update users set identity = ? ,update_time= ? where id = ?'
+    db.query(sql,[req.body.identity,date,req.body.id],(err,result)=>{
         if (err) return res.cc(err)
         res.send({
             status:0,
@@ -241,7 +242,6 @@ exports.searchUser=(req,res)=>{
         result.forEach((e)=>{
             e.password=''
             e.create_time = ''
-            e.image_url = ''
             e.status = ''
         })
         res.send(result)
@@ -254,7 +254,6 @@ exports.searchUserDepartment=(req,res)=>{
         if (err) return res.cc(err)
         result.forEach((e)=>{
             e.password=''
-            e.image_url = ''
         })
         res.send(result)
     })
