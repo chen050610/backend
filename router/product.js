@@ -16,7 +16,7 @@ router.post('/applyOutProduct',productHandler.applyOutProduct)
 // 产品审核列表
 router.post('/applyProductList',productHandler.applyProductList)
 //审核出库
-router.post('/auditProductList',productHandler.auditProductList)
+router.post('/auditProduct',productHandler.auditProduct)
 // 通过出库申请对产品进行搜索
 router.post('/searchProductForId',productHandler.searchProductForId)
 //通过出库申请对产品进行搜索
@@ -35,4 +35,7 @@ router.post('/getOutProductListLength',productHandler.getOutProductListLength)
 router.post('/returnProductListData',productHandler.returnProductListData)
 router.post('/returnApplyProductListData',productHandler.returnApplyProductListData)
 router.post('/returnOutProductListData',productHandler.returnOutProductListData)
+//获取出库产品列表
+router.post('/getauditProductList',productHandler.getauditProductList)
+
 module.exports = router

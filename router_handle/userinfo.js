@@ -115,36 +115,36 @@ exports.changeEmail = (req,res) =>{
     })
 }
 
-//验证账号域邮箱是否一致
-exports.varifyAccountAndEmail = (req,res)=>{
-    const{account,email} = req.body
-    const sql = 'select * from users where account = ?'
-    db.query(sql,account,(err,result)=>{
-        if (err) return  res.cc(err)
-        if (result[0].email === email){res.send({
-            status:0,
-            message:"查询成功",
-            id:result[0].id
-        })}else{
-            res.send({
-                status:1,
-                message:"查询失败"
-            })
-        }
-    })
-}
-
-//修改密码
-exports.changePasswordInlogin=(req,res)=>{
-    req.body.newPassword = bcrypt.hashSync(req.body.newPassword,10)
-    const sql = 'update users set password = ? where id= ?'
-    db.query(sql,[req.body.newPassword,req.body.id],(err,result)=>{
-        if (err) return res.cc(err)
-        res.send({
-            status:0,
-            message:'更改成功'
+    //验证账号域邮箱是否一致
+    exports.varifyAccountAndEmail = (req,res)=>{
+        const{account,email} = req.body
+        const sql = 'select * from users where account = ?'
+        db.query(sql,account,(err,result)=>{
+            if (err) return  res.cc(err)
+            if (result[0].email === email){res.send({
+                status:0,
+                message:"查询成功",
+                id:result[0].id
+            })}else{
+                res.send({
+                    status:1,
+                    message:"查询失败"
+                })
+            }
         })
-    })
-}
+    }
+
+    //修改密码
+    exports.changePasswordInlogin=(req,res)=>{
+        req.body.newPassword = bcrypt.hashSync(req.body.newPassword,10)
+        const sql = 'update users set password = ? where id= ?'
+        db.query(sql,[req.body.newPassword,req.body.id],(err,result)=>{
+            if (err) return res.cc(err)
+            res.send({
+                status:0,
+                message:'更改成功'
+            })
+        })
+    }
 
 

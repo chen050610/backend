@@ -54,9 +54,19 @@ const setRouter = require('./router/setting')
 app.use('/set',setRouter)
 const productRouter = require('./router/product.js')
 app.use('/pro',productRouter)
+const messageRouter = require('./router/message')
+app.use('/msg',messageRouter)
+const fileRouter = require('./router/file')
+app.use('/file',fileRouter)
+const login_logRouter = require('./router/login_log')
+app.use('/lLog',login_logRouter)
+const operation_logRouter = require('./router/operation_log')
+app.use('/oLog',operation_logRouter)
+const overviewHandler = require('./router/overview')
+app.use('/ov',overviewHandler)
 //对不符合joi规则进行报错
 // 对不符合joi规则的情况进行报错
-app.use((err,req, res, next) => {
+app.use((req, res, next) => {
     if (err instanceof Joi.ValidationError) return res.cc(err)
 })
 

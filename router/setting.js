@@ -15,4 +15,6 @@ router.post('/getCompanyIntroduce',settingHandler.getCompanyIntroduce)
 router.post('/getAllCompanyIntroduce',settingHandler.getAllCompanyIntroduce)
 router.post('/setDepartment',settingHandler.setDepartment)
 router.post('/getDepartment',settingHandler.getDepartment)
+router.post('/setProduct',settingHandler.setProduct)
+router.post('/getProduct',settingHandler.getProduct)
 module.exports = router

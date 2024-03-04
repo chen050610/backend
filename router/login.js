@@ -42,6 +42,7 @@ router.post('/searchUserDepartment',loginHandler.searchUserDepartment)
 router.post('/getAdminListLength',loginHandler.getAdminListLength)
 //
 router.post('/returnListData',loginHandler.returnListData)
+router.post('/returnMenuList',loginHandler.returnMenuList)
 
 
 module.exports = router
